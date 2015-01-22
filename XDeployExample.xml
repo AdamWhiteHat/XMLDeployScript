@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Deploy>
+	<Build>
+		<Source Name="TestDLL" Location="C:\Users\Adam\AppData\Local\Temp\Deploy\Test.dll" />
+		<Destination Name="TestDLL">
+			C:\Users\Adam\AppData\Local\Temp\Deploy\Import
+			C:\Users\Adam\AppData\Local\Temp\Deploy\Fix
+			C:\Users\Adam\AppData\Local\Temp\Deploy\Make
+			C:\Users\Adam\AppData\Local\Temp\Deploy\Submit
+			C:\Users\Adam\AppData\Local\Temp\Deploy\Fulfillment
+			C:\Users\Adam\AppData\Local\Temp\Deploy\Preprocess
+		</Destination>
+	</Build>
+</Deploy>

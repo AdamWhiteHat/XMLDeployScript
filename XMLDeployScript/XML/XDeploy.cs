@@ -23,6 +23,9 @@ namespace XMLDeploySimple
 		public XDeploy() { }
 		public XDeploy(params XBuild[] Builds)
 		{
+			if (Builds == null || Builds.Length < 1)
+				return;
+
 			this.Builds = Builds.ToList();
 		}
 	}
@@ -35,9 +38,22 @@ namespace XMLDeploySimple
 		public List<XDestination> Destinations { get; set; }
 
 		public XBuild() { }
+
 		public XBuild(XSource Source, params XDestination[] Destinations)
 		{
+			if (Source == null || Destinations == null || Destinations.Length < 1)
+				return;
+
 			this.Sources = new List<XSource> { Source };
+			this.Destinations = Destinations.ToList();
+		}
+
+		public XBuild(List<XSource> Sources, params XDestination[] Destinations)
+		{
+			if (Sources == null || Sources.Count < 1 || Destinations == null || Destinations.Length < 1)
+				return;
+
+			this.Sources = Sources;
 			this.Destinations = Destinations.ToList();
 		}
 	}

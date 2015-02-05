@@ -14,18 +14,42 @@ namespace XMLDeploySimple
 		[XmlAttribute]
 		public string Name { get; set; }
 		[XmlText]
-		public string Locations { get; set; }
-
-		public List<string> GetLocations()
+		[XmlElement("Locations")]
+		public string _locations { get; set; }
+		[XmlIgnore]
+		public string[] Locations
 		{
-			return this.Locations.Split(new string[] { "\n" }, StringSplitOptions.RemoveEmptyEntries).Select(s => s.Trim()).ToList();
+			get
+			{
+				return GetLocations();
+			}
+			set
+			{
+				SetLocations(value);
+            }
+		}
+
+		private string[] GetLocations()
+		{
+			if (_locations == null || _locations.Length < 1)
+				return new string[] { };
+
+			return _locations.Split(XML.LineSplitter, StringSplitOptions.RemoveEmptyEntries).Select(s => s.Trim()).ToArray();
         }
+
+		private void SetLocations(string[] Locations)
+		{
+			if (Locations == null || Locations.Length < 1)
+				return;
+
+			_locations = Locations.Aggregate((a, b) => string.Format("{1}{0}{2}", XML.LineBreak, a, b));
+		}
 
 		public XDestination() { }
 		public XDestination(string Name,params string[] Locations)
 		{
 			this.Name = Name;
-			this.Locations = Locations.Aggregate((a,b) => string.Format("{1}{0}{2}",Environment.NewLine,a,b));
+			SetLocations(Locations);
 		}
 	}
 }

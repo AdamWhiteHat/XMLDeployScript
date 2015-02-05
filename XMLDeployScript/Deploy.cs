@@ -12,44 +12,71 @@ namespace XMLDeploySimple
 {
 	public static class XMLDeployScript
 	{
-		public static XBuild LoadFile(string Filename)
+		public static bool SaveFile(string Filename, XDeploy DeployScript)
+		{
+			XML.Serialize(Filename, DeployScript);
+
+			if (File.Exists(Filename))
+				return true;
+			else
+				return false;
+		}
+
+		public static XDeploy LoadFile(string Filename)
 		{
 			XDeploy contents = (XDeploy)XML.DeSerialize(Filename,typeof(XDeploy));
 
 			if (contents != null)
 			{
-				if (contents.Builds != null)
-				{
-					return contents.Builds[0];
-				}
+				return contents;
 			}
 
-			return new XBuild();
+			return new XDeploy();
 		}
 
-		public static bool DeployScript(string Filename)
+		public static bool Deploy(string Filename)
 		{
-			XBuild build = LoadFile(Filename);
+			XDeploy build = LoadFile(Filename);
+			return Deploy(build);
+		}
 
-			if (build.Sources.Count < 1)
+        public static bool Deploy(XDeploy Deploy)
+		{
+			if (Deploy == null || Deploy.Builds == null || Deploy.Builds.Count < 1)
 				return false;
 
 			List<string> deployedFiles = new List<string>();
-			foreach (XSource source in build.Sources)
+			foreach (XBuild Build in Deploy.Builds)
 			{
-				string sourceFilename = Path.GetFileName(source.Location);
-
-				List<XDestination> sourceDestinations = build.Destinations.Where(d => d.Name.Contains(source.Name)).ToList();
-				List<string> locations = sourceDestinations.SelectMany(d => d.GetLocations() ).ToList();
-
-				foreach (string directory in locations)
+				if (Build == null || Build.Sources.Count < 1)
+					continue;
+				
+				foreach (XSource source in Build.Sources)
 				{
-					string destinationFilename =  Path.Combine(directory, sourceFilename);
-					File.Copy(source.Location, destinationFilename,true);
-					deployedFiles.Add(destinationFilename);
-				}
+					string[] sourceLocations = source.Locations;
 
+					if (sourceLocations == null || sourceLocations.Length < 1)
+						continue;
+
+					foreach (string sourcePath in sourceLocations)
+					{
+						string sourceFilename = Path.GetFileName(sourcePath);
+
+						List<XDestination> sourceDestinations = Build.Destinations.Where(d => d.Name.Contains(source.Name)).ToList();
+						List<string> destinationLocations = sourceDestinations.SelectMany( d => d.Locations ).ToList();
+
+						foreach (string destinationPath in destinationLocations)
+						{
+							string destinationFilename =  Path.Combine(destinationPath, sourceFilename);
+							File.Copy(sourcePath, destinationFilename, true);
+							deployedFiles.Add(destinationFilename);
+						}
+					}
+				}
 			}
+
+			if (deployedFiles.Count < 1)
+				return false;
 
 			bool allExist = true;
 			foreach (string file in deployedFiles)
@@ -61,6 +88,5 @@ namespace XMLDeploySimple
 			}
 			return allExist;
 		}
-
 	}
 }

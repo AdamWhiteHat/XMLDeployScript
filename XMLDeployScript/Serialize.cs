@@ -15,8 +15,15 @@ namespace XMLDeploySimple
 {
 	public static class XML
 	{
+		public static string LineBreak = Environment.NewLine; //"&#xd;";
+		//public static string[] LineBreaker = new string[] { LineBreak };
+		public static string[] LineSplitter = new string[] { "\n" };
+
 		public static void Serialize(string Filename, object obj)
 		{
+			if (Filename == null || Filename.Length < 1 || obj == null)
+				return;
+
 			using (StreamWriter streamWriter = new StreamWriter(Filename))
 			{
 				XmlSerializer xmlSerializer = new XmlSerializer(obj.GetType());
@@ -26,6 +33,9 @@ namespace XMLDeploySimple
 
 		public static object DeSerialize(string Filename, Type type)
 		{
+			if (Filename == null || !File.Exists(Filename))
+				return null;
+
 			object result = null;
 			using (TextReader reader = new StreamReader(Filename, Encoding.UTF8, true))	// StringReader(Filename))
 			{

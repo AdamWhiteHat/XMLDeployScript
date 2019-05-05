@@ -8,9 +8,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("Test XMLDeployScript")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("http://www.csharpprogramming.tips")]
+[assembly: AssemblyCompany("https://csharpcodewhisperer.blogspot.com")]
 [assembly: AssemblyProduct("Test XMLDeployScript")]
-[assembly: AssemblyCopyright("Copyright © Adam Rakaska 2015")]
+[assembly: AssemblyCopyright("Copyright © Adam White 2015")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

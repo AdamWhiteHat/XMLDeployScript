@@ -1,8 +1,0 @@
-C:\Users\Adam\Documents\Visual Studio 2015\Projects\XMLDeployScript\TestXMLDeployScript\bin\Debug\XMLDeployScript.dll
-C:\Users\Adam\Documents\Visual Studio 2015\Projects\XMLDeployScript\TestXMLDeployScript\bin\Debug\XMLDeployScript.pdb
-C:\Users\Adam\Documents\Visual Studio 2015\Projects\XMLDeployScript\TestXMLDeployScript\obj\Debug\TestXMLDeployScript.csprojResolveAssemblyReference.cache
-C:\Users\Adam\Documents\Visual Studio 2015\Projects\XMLDeployScript\TestXMLDeployScript\bin\Debug\TestXMLDeployScript.exe.config
-C:\Users\Adam\Documents\Visual Studio 2015\Projects\XMLDeployScript\TestXMLDeployScript\bin\Debug\TestXMLDeployScript.exe
-C:\Users\Adam\Documents\Visual Studio 2015\Projects\XMLDeployScript\TestXMLDeployScript\bin\Debug\TestXMLDeployScript.pdb
-C:\Users\Adam\Documents\Visual Studio 2015\Projects\XMLDeployScript\TestXMLDeployScript\obj\Debug\TestXMLDeployScript.exe
-C:\Users\Adam\Documents\Visual Studio 2015\Projects\XMLDeployScript\TestXMLDeployScript\obj\Debug\TestXMLDeployScript.pdb
